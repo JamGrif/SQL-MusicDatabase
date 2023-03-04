@@ -49,6 +49,7 @@
             dataGridView2 = new DataGridView();
             TracksGroupBox = new GroupBox();
             AlbumsGroupBox = new GroupBox();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)AlbumsDataGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AlbumImage).BeginInit();
             AddAlbumGroupBox.SuspendLayout();
@@ -120,7 +121,7 @@
             AddAlbumGroupBox.Controls.Add(AlbumNameLabel);
             AddAlbumGroupBox.Location = new Point(3, 251);
             AddAlbumGroupBox.Name = "AddAlbumGroupBox";
-            AddAlbumGroupBox.Size = new Size(276, 255);
+            AddAlbumGroupBox.Size = new Size(276, 289);
             AddAlbumGroupBox.TabIndex = 5;
             AddAlbumGroupBox.TabStop = false;
             AddAlbumGroupBox.Text = "Add Album";
@@ -226,10 +227,11 @@
             // 
             // TracksGroupBox
             // 
+            TracksGroupBox.Controls.Add(button1);
             TracksGroupBox.Controls.Add(dataGridView2);
             TracksGroupBox.Location = new Point(286, 251);
             TracksGroupBox.Name = "TracksGroupBox";
-            TracksGroupBox.Size = new Size(565, 255);
+            TracksGroupBox.Size = new Size(565, 289);
             TracksGroupBox.TabIndex = 8;
             TracksGroupBox.TabStop = false;
             TracksGroupBox.Text = "Tracks";
@@ -246,11 +248,21 @@
             AlbumsGroupBox.TabStop = false;
             AlbumsGroupBox.Text = "Albums";
             // 
+            // button1
+            // 
+            button1.Location = new Point(6, 253);
+            button1.Name = "button1";
+            button1.Size = new Size(144, 29);
+            button1.TabIndex = 10;
+            button1.Text = "Delete Selected Track";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1106, 509);
+            ClientSize = new Size(1106, 543);
             Controls.Add(AddAlbumGroupBox);
             Controls.Add(AlbumImage);
             Controls.Add(AlbumsDataGridView);
@@ -292,5 +304,6 @@
         private DataGridView dataGridView2;
         private GroupBox TracksGroupBox;
         private GroupBox AlbumsGroupBox;
+        private Button button1;
     }
 }

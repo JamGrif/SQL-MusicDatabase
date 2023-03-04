@@ -1,3 +1,5 @@
+using System.Windows.Forms;
+
 namespace DatabaseSQLApp
 {
     public partial class Form1 : Form
@@ -5,8 +7,9 @@ namespace DatabaseSQLApp
         // Connect a list of items to a controller
         BindingSource albumBindingSource = new BindingSource();
 
+        BindingSource tracksBindingSource = new BindingSource();
 
-
+        List<Album> albums = new List<Album>();
 
         public Form1()
         {
@@ -18,7 +21,10 @@ namespace DatabaseSQLApp
             AlbumsDAO albumsDAO = new AlbumsDAO();
 
             // Connect the list to the grid view control
-            albumBindingSource.DataSource = albumsDAO.GetAllAlbums();
+
+            albums = albumsDAO.GetAllAlbums();
+
+            albumBindingSource.DataSource = albums;
 
             AlbumsDataGridView.DataSource = albumBindingSource;
 
@@ -53,6 +59,12 @@ namespace DatabaseSQLApp
             {
                 AlbumImage.Image = AlbumImage.InitialImage;
             }
+
+
+            // Connect the list to the grid view control
+            tracksBindingSource.DataSource = albums[rowClicked].Tracks;
+
+            dataGridView2.DataSource = tracksBindingSource;
         }
 
         private void AddButton_Click(object sender, EventArgs e)
@@ -72,5 +84,20 @@ namespace DatabaseSQLApp
             MessageBox.Show(result.ToString());
         }
 
+        // delete track button
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Get the row number clicked
+            int rowClicked = dataGridView2.CurrentRow.Index;
+            MessageBox.Show(rowClicked.ToString());
+
+            int trackID = (int)dataGridView2.Rows[rowClicked].Cells[0].Value;
+
+            AlbumsDAO albumDAO = new AlbumsDAO();
+            int result = albumDAO.deleteTrack(trackID);
+
+            dataGridView2.DataSource = null;
+            albums = albumDAO.GetAllAlbums();
+        }
     }
 }

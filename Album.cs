@@ -16,5 +16,6 @@ namespace DatabaseSQLApp
         public string Description { get; set; }
 
         // List of type track
+        public List<Track> Tracks { get; set; }
     }
 }
