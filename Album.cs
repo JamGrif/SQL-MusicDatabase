@@ -1,21 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DatabaseSQLApp
+﻿namespace DatabaseSQLApp
 {
-    internal class Album
+    /// <summary>
+    /// Element in album table
+    /// Field values taken from database
+    /// </summary>
+    public class Album
     {
-        public int ID { get; set; }
-        public string AlbumName { get; set; }
-        public string Artist { get; set; }
-        public int Year { get; set; }
-        public string ImageURL { get; set; }
-        public string Description { get; set; }
+        public int      ID { get; set; }
+        public string   Name { get; set; }
+        public string   Artist { get; set; }
+        public int      Year { get; set; }
+        public string   ImageURL { get; set; }
+        public string   Description { get; set; }
 
-        // List of type track
+        // Each element in track table that use this album as foreign key
         public List<Track> Tracks { get; set; }
     }
 }
