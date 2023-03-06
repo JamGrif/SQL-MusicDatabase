@@ -3,9 +3,10 @@
  
  # Features  
  
- Project uses MAMP to host a local server environment on my machine to use phpMyAdmin to manage a MySQL database  
+ The project uses MAMP to host a local server environment on my machine to use phpMyAdmin to manage a MySQL database that is stored on my machine  
  The database is edited through phpMyAdmin and connected and designed in MySQL Workbench  
- The database is then used in a C# WinForms project to present the data in a Windows application  
+ Finally, the database is then used in a C# WinForms project to present the data in a Windows application  
+ 
  The Windows application allows functionaility such as:  
  - Viewing data in a table  
  - Inserting new elements to a table  
