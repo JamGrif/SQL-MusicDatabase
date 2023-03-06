@@ -36,24 +36,18 @@
             AlbumImage = new PictureBox();
             TracksDataGridView = new DataGridView();
             TracksGroupBox = new GroupBox();
+            AddNewTrackButton = new Button();
+            PlayTrackButton = new Button();
             DeleteSelectedTrackButton = new Button();
             AlbumsGroupBox = new GroupBox();
             AddNewAlbumButton = new Button();
-            AddTrackButton = new Button();
-            txt_trackLyrics = new TextBox();
-            txt_trackVideoURL = new TextBox();
-            txt_trackNumber = new TextBox();
-            txt_trackTitle = new TextBox();
-            LyricsLabel = new Label();
-            VideoURLLabel = new Label();
-            NumberLabel = new Label();
-            TrackTitleLabel = new Label();
-            label1 = new Label();
+            webView = new Microsoft.Web.WebView2.WinForms.WebView2();
             ((System.ComponentModel.ISupportInitialize)AlbumsDataGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AlbumImage).BeginInit();
             ((System.ComponentModel.ISupportInitialize)TracksDataGridView).BeginInit();
             TracksGroupBox.SuspendLayout();
             AlbumsGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)webView).BeginInit();
             SuspendLayout();
             // 
             // LoadAlbumsButton
@@ -68,10 +62,17 @@
             // 
             // AlbumsDataGridView
             // 
+            AlbumsDataGridView.AllowUserToAddRows = false;
+            AlbumsDataGridView.AllowUserToDeleteRows = false;
             AlbumsDataGridView.AllowUserToResizeColumns = false;
             AlbumsDataGridView.AllowUserToResizeRows = false;
+            AlbumsDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             AlbumsDataGridView.Location = new Point(205, 91);
+            AlbumsDataGridView.MultiSelect = false;
             AlbumsDataGridView.Name = "AlbumsDataGridView";
+            AlbumsDataGridView.ReadOnly = true;
+            AlbumsDataGridView.RowHeadersVisible = false;
+            AlbumsDataGridView.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             AlbumsDataGridView.RowTemplate.Height = 25;
             AlbumsDataGridView.Size = new Size(889, 190);
             AlbumsDataGridView.TabIndex = 1;
@@ -110,19 +111,42 @@
             TracksDataGridView.Location = new Point(6, 22);
             TracksDataGridView.Name = "TracksDataGridView";
             TracksDataGridView.RowTemplate.Height = 25;
-            TracksDataGridView.Size = new Size(550, 223);
+            TracksDataGridView.Size = new Size(699, 223);
             TracksDataGridView.TabIndex = 7;
             // 
             // TracksGroupBox
             // 
+            TracksGroupBox.Controls.Add(AddNewTrackButton);
+            TracksGroupBox.Controls.Add(PlayTrackButton);
             TracksGroupBox.Controls.Add(DeleteSelectedTrackButton);
             TracksGroupBox.Controls.Add(TracksDataGridView);
+            TracksGroupBox.Enabled = false;
             TracksGroupBox.Location = new Point(3, 296);
             TracksGroupBox.Name = "TracksGroupBox";
-            TracksGroupBox.Size = new Size(565, 289);
+            TracksGroupBox.Size = new Size(1091, 289);
             TracksGroupBox.TabIndex = 8;
             TracksGroupBox.TabStop = false;
             TracksGroupBox.Text = "Tracks";
+            // 
+            // AddNewTrackButton
+            // 
+            AddNewTrackButton.Location = new Point(188, 253);
+            AddNewTrackButton.Name = "AddNewTrackButton";
+            AddNewTrackButton.Size = new Size(144, 29);
+            AddNewTrackButton.TabIndex = 11;
+            AddNewTrackButton.Text = "Add New Track...";
+            AddNewTrackButton.UseVisualStyleBackColor = true;
+            AddNewTrackButton.Click += AddNewTrackButton_Click;
+            // 
+            // PlayTrackButton
+            // 
+            PlayTrackButton.Location = new Point(877, 253);
+            PlayTrackButton.Name = "PlayTrackButton";
+            PlayTrackButton.Size = new Size(75, 23);
+            PlayTrackButton.TabIndex = 10;
+            PlayTrackButton.Text = "Play Track";
+            PlayTrackButton.UseVisualStyleBackColor = true;
+            PlayTrackButton.Click += PlayTrackButton_Click;
             // 
             // DeleteSelectedTrackButton
             // 
@@ -139,6 +163,7 @@
             AlbumsGroupBox.Controls.Add(AddNewAlbumButton);
             AlbumsGroupBox.Controls.Add(AlbumSearchTextBox);
             AlbumsGroupBox.Controls.Add(SearchButton);
+            AlbumsGroupBox.Enabled = false;
             AlbumsGroupBox.Location = new Point(3, 40);
             AlbumsGroupBox.Name = "AlbumsGroupBox";
             AlbumsGroupBox.Size = new Size(1099, 249);
@@ -156,111 +181,33 @@
             AddNewAlbumButton.UseVisualStyleBackColor = true;
             AddNewAlbumButton.Click += AddNewAlbumButton_Click;
             // 
-            // AddTrackButton
+            // webView
             // 
-            AddTrackButton.Location = new Point(672, 462);
-            AddTrackButton.Name = "AddTrackButton";
-            AddTrackButton.Size = new Size(129, 51);
-            AddTrackButton.TabIndex = 32;
-            AddTrackButton.Text = "Add Track";
-            AddTrackButton.UseVisualStyleBackColor = true;
-            AddTrackButton.Click += AddTrackButton_Click;
-            // 
-            // txt_trackLyrics
-            // 
-            txt_trackLyrics.Location = new Point(710, 409);
-            txt_trackLyrics.Name = "txt_trackLyrics";
-            txt_trackLyrics.Size = new Size(152, 23);
-            txt_trackLyrics.TabIndex = 30;
-            // 
-            // txt_trackVideoURL
-            // 
-            txt_trackVideoURL.Location = new Point(710, 378);
-            txt_trackVideoURL.Name = "txt_trackVideoURL";
-            txt_trackVideoURL.Size = new Size(152, 23);
-            txt_trackVideoURL.TabIndex = 29;
-            // 
-            // txt_trackNumber
-            // 
-            txt_trackNumber.Location = new Point(710, 347);
-            txt_trackNumber.Name = "txt_trackNumber";
-            txt_trackNumber.Size = new Size(152, 23);
-            txt_trackNumber.TabIndex = 28;
-            // 
-            // txt_trackTitle
-            // 
-            txt_trackTitle.Location = new Point(710, 316);
-            txt_trackTitle.Name = "txt_trackTitle";
-            txt_trackTitle.Size = new Size(152, 23);
-            txt_trackTitle.TabIndex = 27;
-            // 
-            // LyricsLabel
-            // 
-            LyricsLabel.AutoSize = true;
-            LyricsLabel.Location = new Point(621, 414);
-            LyricsLabel.Name = "LyricsLabel";
-            LyricsLabel.Size = new Size(36, 15);
-            LyricsLabel.TabIndex = 25;
-            LyricsLabel.Text = "Lyrics";
-            // 
-            // VideoURLLabel
-            // 
-            VideoURLLabel.AutoSize = true;
-            VideoURLLabel.Location = new Point(621, 383);
-            VideoURLLabel.Name = "VideoURLLabel";
-            VideoURLLabel.Size = new Size(61, 15);
-            VideoURLLabel.TabIndex = 24;
-            VideoURLLabel.Text = "Video URL";
-            // 
-            // NumberLabel
-            // 
-            NumberLabel.AutoSize = true;
-            NumberLabel.Location = new Point(621, 352);
-            NumberLabel.Name = "NumberLabel";
-            NumberLabel.Size = new Size(51, 15);
-            NumberLabel.TabIndex = 23;
-            NumberLabel.Text = "Number";
-            // 
-            // TrackTitleLabel
-            // 
-            TrackTitleLabel.AutoSize = true;
-            TrackTitleLabel.Location = new Point(621, 321);
-            TrackTitleLabel.Name = "TrackTitleLabel";
-            TrackTitleLabel.Size = new Size(59, 15);
-            TrackTitleLabel.TabIndex = 22;
-            TrackTitleLabel.Text = "Track Title";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(616, 292);
-            label1.Name = "label1";
-            label1.Size = new Size(233, 15);
-            label1.TabIndex = 33;
-            label1.Text = "adds new track to currently selected album";
+            webView.AllowExternalDrop = true;
+            webView.CreationProperties = null;
+            webView.DefaultBackgroundColor = Color.White;
+            webView.Location = new Point(769, 318);
+            webView.Name = "webView";
+            webView.Size = new Size(308, 223);
+            webView.Source = new Uri("https://www.microsoft.com", UriKind.Absolute);
+            webView.TabIndex = 11;
+            webView.ZoomFactor = 1D;
             // 
             // MusicForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1104, 591);
-            Controls.Add(label1);
-            Controls.Add(AddTrackButton);
-            Controls.Add(txt_trackLyrics);
-            Controls.Add(txt_trackVideoURL);
-            Controls.Add(txt_trackNumber);
-            Controls.Add(txt_trackTitle);
-            Controls.Add(LyricsLabel);
-            Controls.Add(VideoURLLabel);
-            Controls.Add(NumberLabel);
-            Controls.Add(TrackTitleLabel);
+            Controls.Add(webView);
             Controls.Add(LoadAlbumsButton);
             Controls.Add(AlbumImage);
             Controls.Add(AlbumsDataGridView);
             Controls.Add(TracksGroupBox);
             Controls.Add(AlbumsGroupBox);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
             Name = "MusicForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Music";
             Load += MusicForm_Load;
             ((System.ComponentModel.ISupportInitialize)AlbumsDataGridView).EndInit();
@@ -269,8 +216,8 @@
             TracksGroupBox.ResumeLayout(false);
             AlbumsGroupBox.ResumeLayout(false);
             AlbumsGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)webView).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -285,15 +232,8 @@
         private GroupBox AlbumsGroupBox;
         private Button DeleteSelectedTrackButton;
         private Button AddNewAlbumButton;
-        private Button AddTrackButton;
-        private TextBox txt_trackLyrics;
-        private TextBox txt_trackVideoURL;
-        private TextBox txt_trackNumber;
-        private TextBox txt_trackTitle;
-        private Label LyricsLabel;
-        private Label VideoURLLabel;
-        private Label NumberLabel;
-        private Label TrackTitleLabel;
-        private Label label1;
+        private Button AddNewTrackButton;
+        private Button PlayTrackButton;
+        private Microsoft.Web.WebView2.WinForms.WebView2 webView;
     }
 }

@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewAlbumForm));
-            AddButton = new Button();
+            AddAlbumButton = new Button();
             txt_Description = new TextBox();
             txt_ImageURL = new TextBox();
             txt_albumYear = new TextBox();
@@ -40,19 +41,22 @@
             YearLabel = new Label();
             ArtistLabel = new Label();
             AlbumNameLabel = new Label();
-            ResultText = new Label();
-            label1 = new Label();
+            EnterNewLabel = new Label();
+            SuccessLabel = new Label();
+            FailLabel = new Label();
+            TextVisibilityTimer = new System.Windows.Forms.Timer(components);
             SuspendLayout();
             // 
-            // AddButton
+            // AddAlbumButton
             // 
-            AddButton.Location = new Point(113, 213);
-            AddButton.Name = "AddButton";
-            AddButton.Size = new Size(129, 51);
-            AddButton.TabIndex = 21;
-            AddButton.Text = "Add";
-            AddButton.UseVisualStyleBackColor = true;
-            AddButton.Click += AddButton_Click;
+            AddAlbumButton.Enabled = false;
+            AddAlbumButton.Location = new Point(113, 213);
+            AddAlbumButton.Name = "AddAlbumButton";
+            AddAlbumButton.Size = new Size(129, 51);
+            AddAlbumButton.TabIndex = 21;
+            AddAlbumButton.Text = "Add Album";
+            AddAlbumButton.UseVisualStyleBackColor = true;
+            AddAlbumButton.Click += AddAlbumButton_Click;
             // 
             // txt_Description
             // 
@@ -60,6 +64,7 @@
             txt_Description.Name = "txt_Description";
             txt_Description.Size = new Size(152, 23);
             txt_Description.TabIndex = 20;
+            txt_Description.TextChanged += txt_Description_TextChanged;
             // 
             // txt_ImageURL
             // 
@@ -67,6 +72,7 @@
             txt_ImageURL.Name = "txt_ImageURL";
             txt_ImageURL.Size = new Size(152, 23);
             txt_ImageURL.TabIndex = 19;
+            txt_ImageURL.TextChanged += txt_ImageURL_TextChanged;
             // 
             // txt_albumYear
             // 
@@ -74,6 +80,7 @@
             txt_albumYear.Name = "txt_albumYear";
             txt_albumYear.Size = new Size(152, 23);
             txt_albumYear.TabIndex = 18;
+            txt_albumYear.TextChanged += txt_albumYear_TextChanged;
             // 
             // txt_albumArtist
             // 
@@ -81,6 +88,7 @@
             txt_albumArtist.Name = "txt_albumArtist";
             txt_albumArtist.Size = new Size(152, 23);
             txt_albumArtist.TabIndex = 17;
+            txt_albumArtist.TextChanged += txt_albumArtist_TextChanged;
             // 
             // txt_albumName
             // 
@@ -88,6 +96,7 @@
             txt_albumName.Name = "txt_albumName";
             txt_albumName.Size = new Size(152, 23);
             txt_albumName.TabIndex = 16;
+            txt_albumName.TextChanged += txt_albumName_TextChanged;
             // 
             // DescriptionLabel
             // 
@@ -134,34 +143,54 @@
             AlbumNameLabel.TabIndex = 11;
             AlbumNameLabel.Text = "Album Name";
             // 
-            // ResultText
+            // EnterNewLabel
             // 
-            ResultText.AutoSize = true;
-            ResultText.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            ResultText.Location = new Point(74, 276);
-            ResultText.Name = "ResultText";
-            ResultText.Size = new Size(49, 25);
-            ResultText.TabIndex = 22;
-            ResultText.Text = "Text";
+            EnterNewLabel.AutoSize = true;
+            EnterNewLabel.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
+            EnterNewLabel.Location = new Point(26, 5);
+            EnterNewLabel.Name = "EnterNewLabel";
+            EnterNewLabel.Size = new Size(332, 37);
+            EnterNewLabel.TabIndex = 23;
+            EnterNewLabel.Text = "Enter new album details:";
             // 
-            // label1
+            // SuccessLabel
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(26, 5);
-            label1.Name = "label1";
-            label1.Size = new Size(332, 37);
-            label1.TabIndex = 23;
-            label1.Text = "Enter new album details:";
+            SuccessLabel.AutoSize = true;
+            SuccessLabel.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            SuccessLabel.ForeColor = Color.LimeGreen;
+            SuccessLabel.Location = new Point(24, 273);
+            SuccessLabel.Name = "SuccessLabel";
+            SuccessLabel.Size = new Size(348, 25);
+            SuccessLabel.TabIndex = 24;
+            SuccessLabel.Text = "Successfully added album to database";
+            SuccessLabel.Visible = false;
+            // 
+            // FailLabel
+            // 
+            FailLabel.AutoSize = true;
+            FailLabel.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            FailLabel.ForeColor = Color.Tomato;
+            FailLabel.Location = new Point(47, 273);
+            FailLabel.Name = "FailLabel";
+            FailLabel.Size = new Size(295, 25);
+            FailLabel.TabIndex = 25;
+            FailLabel.Text = "Failed to add album to database";
+            FailLabel.Visible = false;
+            // 
+            // TextVisibilityTimer
+            // 
+            TextVisibilityTimer.Interval = 2000;
+            TextVisibilityTimer.Tick += TextVisibilityTimer_Tick;
             // 
             // NewAlbumForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(384, 311);
-            Controls.Add(label1);
-            Controls.Add(ResultText);
-            Controls.Add(AddButton);
+            Controls.Add(FailLabel);
+            Controls.Add(SuccessLabel);
+            Controls.Add(EnterNewLabel);
+            Controls.Add(AddAlbumButton);
             Controls.Add(txt_Description);
             Controls.Add(txt_ImageURL);
             Controls.Add(txt_albumYear);
@@ -174,7 +203,9 @@
             Controls.Add(AlbumNameLabel);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
             Name = "NewAlbumForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "New Album";
             FormClosing += NewAlbumForm_FormClosing;
             ResumeLayout(false);
@@ -183,7 +214,7 @@
 
         #endregion
 
-        private Button AddButton;
+        private Button AddAlbumButton;
         private TextBox txt_Description;
         private TextBox txt_ImageURL;
         private TextBox txt_albumYear;
@@ -194,7 +225,9 @@
         private Label YearLabel;
         private Label ArtistLabel;
         private Label AlbumNameLabel;
-        private Label ResultText;
-        private Label label1;
+        private Label EnterNewLabel;
+        private Label SuccessLabel;
+        private Label FailLabel;
+        private System.Windows.Forms.Timer TextVisibilityTimer;
     }
 }
