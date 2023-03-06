@@ -1,6 +1,6 @@
 using System.Runtime.InteropServices;
 
-namespace DatabaseSQLApp
+namespace DatabaseSQLApp.src
 {
     internal static class Program
     {

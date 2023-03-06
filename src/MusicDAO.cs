@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DatabaseSQLApp
+namespace DatabaseSQLApp.src
 {
     /// <summary>
     /// Name of each column of album table in database
@@ -38,7 +38,7 @@ namespace DatabaseSQLApp
     public static class MusicDAO
     {
         private static string databaseConnectionString = "datasource=localhost;port=3306;username=root;password=root;database=music;";
-        
+
         /// <summary>
         /// Utility - Fills out an Album object with values taken from an element in album table in the database
         /// </summary>
@@ -46,11 +46,11 @@ namespace DatabaseSQLApp
         {
             return new Album
             {
-                ID          = reader.GetInt32((int)AlbumColumnName.ID),
-                Name        = reader.GetString((int)AlbumColumnName.Name),
-                Artist      = reader.GetString((int)AlbumColumnName.Artist),
-                Year        = reader.GetInt32((int)AlbumColumnName.Year),
-                ImageURL    = reader.GetString((int)AlbumColumnName.ImageURL),
+                ID = reader.GetInt32((int)AlbumColumnName.ID),
+                Name = reader.GetString((int)AlbumColumnName.Name),
+                Artist = reader.GetString((int)AlbumColumnName.Artist),
+                Year = reader.GetInt32((int)AlbumColumnName.Year),
+                ImageURL = reader.GetString((int)AlbumColumnName.ImageURL),
                 Description = reader.GetString((int)AlbumColumnName.Description)
             };
         }
@@ -62,11 +62,11 @@ namespace DatabaseSQLApp
         {
             return new Track
             {
-                ID          = reader.GetInt32((int)TrackColumnName.ID),
-                Name        = reader.GetString((int)TrackColumnName.Name),
-                number      = reader.GetInt32((int)TrackColumnName.Number),
-                VideoURL    = reader.GetString((int)TrackColumnName.VideoURL),
-                Lyrics      = reader.GetString((int)TrackColumnName.Lyrics)
+                ID = reader.GetInt32((int)TrackColumnName.ID),
+                Name = reader.GetString((int)TrackColumnName.Name),
+                number = reader.GetInt32((int)TrackColumnName.Number),
+                VideoURL = reader.GetString((int)TrackColumnName.VideoURL),
+                Lyrics = reader.GetString((int)TrackColumnName.Lyrics)
             };
         }
 
@@ -153,11 +153,11 @@ namespace DatabaseSQLApp
                 CommandText = "INSERT INTO `albums`(`ALBUM_TITLE`, `ARTIST`, `YEAR`, `IMAGE_NAME`, `DESCRIPTION`) VALUES (@albumtitle, @artist, @year, @imageURL, @description)",
                 Connection = databaseConnection
             };
-            sqlCommand.Parameters.AddWithValue("@albumtitle",   album.Name);
-            sqlCommand.Parameters.AddWithValue("@artist",       album.Artist);
-            sqlCommand.Parameters.AddWithValue("@year",         album.Year);
-            sqlCommand.Parameters.AddWithValue("@imageURL",     album.ImageURL);
-            sqlCommand.Parameters.AddWithValue("@description",  album.Description);
+            sqlCommand.Parameters.AddWithValue("@albumtitle", album.Name);
+            sqlCommand.Parameters.AddWithValue("@artist", album.Artist);
+            sqlCommand.Parameters.AddWithValue("@year", album.Year);
+            sqlCommand.Parameters.AddWithValue("@imageURL", album.ImageURL);
+            sqlCommand.Parameters.AddWithValue("@description", album.Description);
 
             sqlCommand.ExecuteNonQuery();
 
