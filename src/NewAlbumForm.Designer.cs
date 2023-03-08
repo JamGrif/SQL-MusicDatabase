@@ -52,7 +52,7 @@
             AddAlbumButton.Enabled = false;
             AddAlbumButton.Location = new Point(113, 213);
             AddAlbumButton.Name = "AddAlbumButton";
-            AddAlbumButton.Size = new Size(129, 51);
+            AddAlbumButton.Size = new Size(130, 50);
             AddAlbumButton.TabIndex = 21;
             AddAlbumButton.Text = "Add Album";
             AddAlbumButton.UseVisualStyleBackColor = true;
@@ -179,7 +179,7 @@
             // 
             // TextVisibilityTimer
             // 
-            TextVisibilityTimer.Interval = 2000;
+            TextVisibilityTimer.Interval = 3000;
             TextVisibilityTimer.Tick += TextVisibilityTimer_Tick;
             // 
             // NewAlbumForm

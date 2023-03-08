@@ -52,9 +52,9 @@
             // 
             // LoadAlbumsButton
             // 
-            LoadAlbumsButton.Location = new Point(497, 5);
+            LoadAlbumsButton.Location = new Point(497, 9);
             LoadAlbumsButton.Name = "LoadAlbumsButton";
-            LoadAlbumsButton.Size = new Size(144, 29);
+            LoadAlbumsButton.Size = new Size(150, 30);
             LoadAlbumsButton.TabIndex = 0;
             LoadAlbumsButton.Text = "Load Albums";
             LoadAlbumsButton.UseVisualStyleBackColor = true;
@@ -80,9 +80,9 @@
             // 
             // SearchButton
             // 
-            SearchButton.Location = new Point(613, 11);
+            SearchButton.Location = new Point(380, 15);
             SearchButton.Name = "SearchButton";
-            SearchButton.Size = new Size(89, 34);
+            SearchButton.Size = new Size(150, 30);
             SearchButton.TabIndex = 2;
             SearchButton.Text = "Search";
             SearchButton.UseVisualStyleBackColor = true;
@@ -90,7 +90,7 @@
             // 
             // AlbumSearchTextBox
             // 
-            AlbumSearchTextBox.Location = new Point(430, 22);
+            AlbumSearchTextBox.Location = new Point(535, 20);
             AlbumSearchTextBox.Name = "AlbumSearchTextBox";
             AlbumSearchTextBox.Size = new Size(168, 23);
             AlbumSearchTextBox.TabIndex = 3;
@@ -107,12 +107,20 @@
             // 
             // TracksDataGridView
             // 
-            TracksDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            TracksDataGridView.AllowUserToAddRows = false;
+            TracksDataGridView.AllowUserToDeleteRows = false;
+            TracksDataGridView.AllowUserToResizeColumns = false;
+            TracksDataGridView.AllowUserToResizeRows = false;
+            TracksDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             TracksDataGridView.Location = new Point(6, 22);
+            TracksDataGridView.MultiSelect = false;
             TracksDataGridView.Name = "TracksDataGridView";
+            TracksDataGridView.ReadOnly = true;
+            TracksDataGridView.RowHeadersVisible = false;
+            TracksDataGridView.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             TracksDataGridView.RowTemplate.Height = 25;
             TracksDataGridView.Size = new Size(699, 223);
-            TracksDataGridView.TabIndex = 7;
+            TracksDataGridView.TabIndex = 1;
             // 
             // TracksGroupBox
             // 
@@ -130,9 +138,9 @@
             // 
             // AddNewTrackButton
             // 
-            AddNewTrackButton.Location = new Point(188, 253);
+            AddNewTrackButton.Location = new Point(10, 250);
             AddNewTrackButton.Name = "AddNewTrackButton";
-            AddNewTrackButton.Size = new Size(144, 29);
+            AddNewTrackButton.Size = new Size(150, 30);
             AddNewTrackButton.TabIndex = 11;
             AddNewTrackButton.Text = "Add New Track...";
             AddNewTrackButton.UseVisualStyleBackColor = true;
@@ -140,9 +148,9 @@
             // 
             // PlayTrackButton
             // 
-            PlayTrackButton.Location = new Point(877, 253);
+            PlayTrackButton.Location = new Point(370, 250);
             PlayTrackButton.Name = "PlayTrackButton";
-            PlayTrackButton.Size = new Size(75, 23);
+            PlayTrackButton.Size = new Size(150, 30);
             PlayTrackButton.TabIndex = 10;
             PlayTrackButton.Text = "Play Track";
             PlayTrackButton.UseVisualStyleBackColor = true;
@@ -150,9 +158,9 @@
             // 
             // DeleteSelectedTrackButton
             // 
-            DeleteSelectedTrackButton.Location = new Point(6, 253);
+            DeleteSelectedTrackButton.Location = new Point(190, 250);
             DeleteSelectedTrackButton.Name = "DeleteSelectedTrackButton";
-            DeleteSelectedTrackButton.Size = new Size(144, 29);
+            DeleteSelectedTrackButton.Size = new Size(150, 30);
             DeleteSelectedTrackButton.TabIndex = 10;
             DeleteSelectedTrackButton.Text = "Delete Selected Track";
             DeleteSelectedTrackButton.UseVisualStyleBackColor = true;
@@ -173,9 +181,9 @@
             // 
             // AddNewAlbumButton
             // 
-            AddNewAlbumButton.Location = new Point(740, 11);
+            AddNewAlbumButton.Location = new Point(200, 15);
             AddNewAlbumButton.Name = "AddNewAlbumButton";
-            AddNewAlbumButton.Size = new Size(119, 33);
+            AddNewAlbumButton.Size = new Size(150, 30);
             AddNewAlbumButton.TabIndex = 11;
             AddNewAlbumButton.Text = "Add New Album...";
             AddNewAlbumButton.UseVisualStyleBackColor = true;
@@ -191,6 +199,7 @@
             webView.Size = new Size(308, 223);
             webView.Source = new Uri("https://www.microsoft.com", UriKind.Absolute);
             webView.TabIndex = 11;
+            webView.Visible = false;
             webView.ZoomFactor = 1D;
             // 
             // MusicForm

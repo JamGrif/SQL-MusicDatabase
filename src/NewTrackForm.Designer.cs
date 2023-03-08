@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewTrackForm));
             AddTrackButton = new Button();
             txt_trackLyrics = new TextBox();
@@ -40,14 +41,17 @@
             TrackTitleLabel = new Label();
             EnterNewLabel = new Label();
             AddingToLabel = new Label();
-            ResultText = new Label();
+            FailLabel = new Label();
+            SuccessLabel = new Label();
+            TextVisibilityTimer = new System.Windows.Forms.Timer(components);
             SuspendLayout();
             // 
             // AddTrackButton
             // 
-            AddTrackButton.Location = new Point(123, 215);
+            AddTrackButton.Enabled = false;
+            AddTrackButton.Location = new Point(113, 213);
             AddTrackButton.Name = "AddTrackButton";
-            AddTrackButton.Size = new Size(129, 51);
+            AddTrackButton.Size = new Size(130, 50);
             AddTrackButton.TabIndex = 41;
             AddTrackButton.Text = "Add Track";
             AddTrackButton.UseVisualStyleBackColor = true;
@@ -55,36 +59,40 @@
             // 
             // txt_trackLyrics
             // 
-            txt_trackLyrics.Location = new Point(161, 162);
+            txt_trackLyrics.Location = new Point(161, 169);
             txt_trackLyrics.Name = "txt_trackLyrics";
             txt_trackLyrics.Size = new Size(152, 23);
             txt_trackLyrics.TabIndex = 40;
+            txt_trackLyrics.TextChanged += txt_trackLyrics_TextChanged;
             // 
             // txt_trackVideoURL
             // 
-            txt_trackVideoURL.Location = new Point(161, 131);
+            txt_trackVideoURL.Location = new Point(161, 138);
             txt_trackVideoURL.Name = "txt_trackVideoURL";
             txt_trackVideoURL.Size = new Size(152, 23);
             txt_trackVideoURL.TabIndex = 39;
+            txt_trackVideoURL.TextChanged += txt_trackVideoURL_TextChanged;
             // 
             // txt_trackNumber
             // 
-            txt_trackNumber.Location = new Point(161, 100);
+            txt_trackNumber.Location = new Point(161, 107);
             txt_trackNumber.Name = "txt_trackNumber";
             txt_trackNumber.Size = new Size(152, 23);
             txt_trackNumber.TabIndex = 38;
+            txt_trackNumber.TextChanged += txt_trackNumber_TextChanged;
             // 
             // txt_trackTitle
             // 
-            txt_trackTitle.Location = new Point(161, 69);
+            txt_trackTitle.Location = new Point(161, 76);
             txt_trackTitle.Name = "txt_trackTitle";
             txt_trackTitle.Size = new Size(152, 23);
             txt_trackTitle.TabIndex = 37;
+            txt_trackTitle.TextChanged += txt_trackTitle_TextChanged;
             // 
             // LyricsLabel
             // 
             LyricsLabel.AutoSize = true;
-            LyricsLabel.Location = new Point(72, 167);
+            LyricsLabel.Location = new Point(72, 174);
             LyricsLabel.Name = "LyricsLabel";
             LyricsLabel.Size = new Size(36, 15);
             LyricsLabel.TabIndex = 36;
@@ -93,7 +101,7 @@
             // VideoURLLabel
             // 
             VideoURLLabel.AutoSize = true;
-            VideoURLLabel.Location = new Point(72, 136);
+            VideoURLLabel.Location = new Point(72, 143);
             VideoURLLabel.Name = "VideoURLLabel";
             VideoURLLabel.Size = new Size(61, 15);
             VideoURLLabel.TabIndex = 35;
@@ -102,7 +110,7 @@
             // NumberLabel
             // 
             NumberLabel.AutoSize = true;
-            NumberLabel.Location = new Point(72, 105);
+            NumberLabel.Location = new Point(72, 112);
             NumberLabel.Name = "NumberLabel";
             NumberLabel.Size = new Size(51, 15);
             NumberLabel.TabIndex = 34;
@@ -111,7 +119,7 @@
             // TrackTitleLabel
             // 
             TrackTitleLabel.AutoSize = true;
-            TrackTitleLabel.Location = new Point(72, 74);
+            TrackTitleLabel.Location = new Point(72, 81);
             TrackTitleLabel.Name = "TrackTitleLabel";
             TrackTitleLabel.Size = new Size(59, 15);
             TrackTitleLabel.TabIndex = 33;
@@ -130,28 +138,49 @@
             // AddingToLabel
             // 
             AddingToLabel.AutoSize = true;
-            AddingToLabel.Location = new Point(93, 40);
+            AddingToLabel.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            AddingToLabel.Location = new Point(84, 40);
             AddingToLabel.Name = "AddingToLabel";
-            AddingToLabel.Size = new Size(186, 15);
+            AddingToLabel.Size = new Size(216, 17);
             AddingToLabel.TabIndex = 43;
             AddingToLabel.Text = "Adding to album ALBUMNAME ...";
             // 
-            // ResultText
+            // FailLabel
             // 
-            ResultText.AutoSize = true;
-            ResultText.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            ResultText.Location = new Point(12, 277);
-            ResultText.Name = "ResultText";
-            ResultText.Size = new Size(62, 25);
-            ResultText.TabIndex = 44;
-            ResultText.Text = "result";
+            FailLabel.AutoSize = true;
+            FailLabel.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            FailLabel.ForeColor = Color.Tomato;
+            FailLabel.Location = new Point(47, 273);
+            FailLabel.Name = "FailLabel";
+            FailLabel.Size = new Size(284, 25);
+            FailLabel.TabIndex = 46;
+            FailLabel.Text = "Failed to add track to database";
+            FailLabel.Visible = false;
+            // 
+            // SuccessLabel
+            // 
+            SuccessLabel.AutoSize = true;
+            SuccessLabel.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            SuccessLabel.ForeColor = Color.LimeGreen;
+            SuccessLabel.Location = new Point(24, 273);
+            SuccessLabel.Name = "SuccessLabel";
+            SuccessLabel.Size = new Size(337, 25);
+            SuccessLabel.TabIndex = 45;
+            SuccessLabel.Text = "Successfully added track to database";
+            SuccessLabel.Visible = false;
+            // 
+            // TextVisibilityTimer
+            // 
+            TextVisibilityTimer.Interval = 3000;
+            TextVisibilityTimer.Tick += TextVisibilityTimer_Tick;
             // 
             // NewTrackForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(384, 311);
-            Controls.Add(ResultText);
+            Controls.Add(FailLabel);
+            Controls.Add(SuccessLabel);
             Controls.Add(AddingToLabel);
             Controls.Add(EnterNewLabel);
             Controls.Add(AddTrackButton);
@@ -187,6 +216,8 @@
         private Label TrackTitleLabel;
         private Label EnterNewLabel;
         private Label AddingToLabel;
-        private Label ResultText;
+        private Label FailLabel;
+        private Label SuccessLabel;
+        private System.Windows.Forms.Timer TextVisibilityTimer;
     }
 }
