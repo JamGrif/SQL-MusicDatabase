@@ -10,16 +10,16 @@ namespace DatabaseSQLApp
     public partial class MusicForm : Form
     {
         // Connect a list of items to a controller
-        BindingSource albumBindingSource = new BindingSource();
-        BindingSource tracksBindingSource = new BindingSource();
+        private readonly BindingSource albumBindingSource = new BindingSource();
+        private readonly BindingSource tracksBindingSource = new BindingSource();
 
         public NewAlbumForm? albumForm = null;
         public NewTrackForm? trackForm = null;
 
         // Cache all albums in albums table
-        List<Album> cacheAlbumsTable = new List<Album>();
+        private List<Album> cacheAlbumsTable = new List<Album>();
 
-        public int selctedAlbumIndex;
+        private int selctedAlbumIndex;
 
         public MusicForm()
         {
@@ -81,6 +81,10 @@ namespace DatabaseSQLApp
         /// </summary>
         private void AlbumsDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            // Can't change selected album while adding new track
+            if (trackForm != null)
+                return;
+
             // Treat sender as DataGridView
             DataGridView albumDataGridView = (DataGridView)sender;
 
@@ -162,11 +166,13 @@ namespace DatabaseSQLApp
                 if (webView != null && webView.CoreWebView2 != null)
                 {
                     webView.CoreWebView2.Navigate(videoURL);
+                    webView.Visible = true;
                 }
             }
             catch (Exception)
             {
             }
         }
+
     }
 }

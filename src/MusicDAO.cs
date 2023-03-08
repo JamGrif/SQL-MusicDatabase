@@ -1,10 +1,4 @@
 ﻿using MySql.Data.MySqlClient;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DatabaseSQLApp.src
 {
@@ -64,7 +58,7 @@ namespace DatabaseSQLApp.src
             {
                 ID = reader.GetInt32((int)TrackColumnName.ID),
                 Name = reader.GetString((int)TrackColumnName.Name),
-                number = reader.GetInt32((int)TrackColumnName.Number),
+                Number = reader.GetInt32((int)TrackColumnName.Number),
                 VideoURL = reader.GetString((int)TrackColumnName.VideoURL),
                 Lyrics = reader.GetString((int)TrackColumnName.Lyrics)
             };
@@ -177,7 +171,7 @@ namespace DatabaseSQLApp.src
                 Connection = databaseConnection
             };
             sqlCommand.Parameters.AddWithValue("@tracktitle", track.Name);
-            sqlCommand.Parameters.AddWithValue("@number", track.number);
+            sqlCommand.Parameters.AddWithValue("@number", track.Number);
             sqlCommand.Parameters.AddWithValue("@videourl", track.VideoURL);
             sqlCommand.Parameters.AddWithValue("@lyrics", track.Lyrics);
             sqlCommand.Parameters.AddWithValue("@albumsid", track.albums_ID);

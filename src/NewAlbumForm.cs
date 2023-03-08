@@ -1,27 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using DatabaseSQLApp.src;
+﻿using DatabaseSQLApp.src;
+using System.Media;
 
 namespace DatabaseSQLApp
 {
     public partial class NewAlbumForm : Form
     {
-        private MusicForm ParentMusicForm;
+        private readonly MusicForm ParentMusicForm;
+
+        /// <summary>
+        /// Used when accessing TextBoxEmpty[]
+        /// </summary>
+        private enum TextBoxID
+        {
+            AlbumName = 0,
+            Artist = 1,
+            Year = 2,
+            ImageUrl = 3,
+            Description = 4
+        }
 
         // Holds whether each TextBox is empty or not
-        public bool[] TextBoxEmpty = new bool[5] { 
-            true,   // Album Name
-            true,   // Artist
-            true,   // Year
-            true,   // Image URL
-            true    // Description
+        public bool[] TextBoxEmpty = new bool[5] {
+            true,
+            true,
+            true,
+            true,
+            true
         };
 
         public NewAlbumForm(MusicForm parentMusicForm)
@@ -32,7 +36,16 @@ namespace DatabaseSQLApp
         }
 
         /// <summary>
-        /// Insert a new element to the album table with data from TextBoxes
+        /// Remove reference to this form in MusicForm
+        /// Invoked when NewAlbumForm is closing
+        /// </summary>
+        private void NewAlbumForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ParentMusicForm.albumForm = null;
+        }
+
+        /// <summary>
+        /// Insert a new element to the album table with data from TextBox
         /// "Add" Button
         /// </summary>
         private void AddAlbumButton_Click(object sender, EventArgs e)
@@ -69,69 +82,76 @@ namespace DatabaseSQLApp
             catch (Exception)
             {
                 FailLabel.Visible = true;
+                SystemSounds.Exclamation.Play();
+            }
+            finally
+            {
                 TextVisibilityTimer.Start();
             }
         }
 
-        private void NewAlbumForm_FormClosing(object sender, FormClosingEventArgs e)
+        /// <summary>
+        /// Enable Add Album button if all TextBox objects contain text
+        /// </summary>
+        private void SetButtonState(TextBoxID ID, string TextToCheck)
         {
-            // Remove reference to this form in parent
-            ParentMusicForm.albumForm = null;
+            TextBoxEmpty[(int)ID] = string.IsNullOrEmpty(TextToCheck) ? true : false;
+            
+            // If any TextBox is empty, disable AddAlbum button
+            for (int i = 0; i < TextBoxEmpty.Length; i++)
+            {
+                if (TextBoxEmpty[i])
+                {
+                    AddAlbumButton.Enabled = false;
+                    return;
+                }
+            }
+            AddAlbumButton.Enabled = true;
         }
 
-        
-
-        private void SetButtonState()
-        {
-            if (TextBoxEmpty[0] ||
-                TextBoxEmpty[1] ||
-                TextBoxEmpty[2] ||
-                TextBoxEmpty[3] ||
-                TextBoxEmpty[4])
-            {
-                AddAlbumButton.Enabled = false;
-            }
-            else
-            {
-                AddAlbumButton.Enabled = true;
-            }
-        }
-
+        /// <summary>
+        /// Check if txt_albumName is empty or not
+        /// </summary>
         private void txt_albumName_TextChanged(object sender, EventArgs e)
         {
-            TextBoxEmpty[0] = string.IsNullOrEmpty(txt_albumName.Text) ? true : false;
-
-            SetButtonState();
+            SetButtonState(TextBoxID.AlbumName, txt_albumName.Text);
         }
 
+        /// <summary>
+        /// Check if txt_albumArtist is empty or not
+        /// </summary>
         private void txt_albumArtist_TextChanged(object sender, EventArgs e)
         {
-            TextBoxEmpty[1] = string.IsNullOrEmpty(txt_albumArtist.Text) ? true : false;
-
-            SetButtonState();
+            SetButtonState(TextBoxID.Artist, txt_albumArtist.Text);
         }
 
+        /// <summary>
+        /// Check if txt_albumYear is empty or not
+        /// </summary>
         private void txt_albumYear_TextChanged(object sender, EventArgs e)
         {
-            TextBoxEmpty[2] = string.IsNullOrEmpty(txt_albumYear.Text) ? true : false;
-
-            SetButtonState();
+            SetButtonState(TextBoxID.Year, txt_albumYear.Text);
         }
 
+        /// <summary>
+        /// Check if txt_ImageURL is empty or not
+        /// </summary>
         private void txt_ImageURL_TextChanged(object sender, EventArgs e)
         {
-            TextBoxEmpty[3] = string.IsNullOrEmpty(txt_ImageURL.Text) ? true : false;
-
-            SetButtonState();
+            SetButtonState(TextBoxID.ImageUrl, txt_ImageURL.Text);
         }
 
+        /// <summary>
+        /// Check if txt_Description is empty or not
+        /// </summary>
         private void txt_Description_TextChanged(object sender, EventArgs e)
         {
-            TextBoxEmpty[4] = string.IsNullOrEmpty(txt_Description.Text) ? true : false;
-
-            SetButtonState();
+            SetButtonState(TextBoxID.Description, txt_Description.Text);
         }
 
+        /// <summary>
+        /// Hide status text and stop timer on first tick
+        /// </summary>
         private void TextVisibilityTimer_Tick(object sender, EventArgs e)
         {
             FailLabel.Visible = false;
@@ -140,6 +160,4 @@ namespace DatabaseSQLApp
             TextVisibilityTimer.Stop();
         }
     }
-
-
 }
