@@ -1,12 +1,17 @@
 # SQL-MusicDatabase
 
- WinForms C# front-end and a MySQL database back-end to portray a program to view music albums and their associated tracks  
+ WinForms C# front-end and a MySQL database back-end to view stored music albums and their associated tracks  
+ 
+ ![](media/banner1.jpg)
  
  # Features  
  
  The project uses MAMP to host a local server environment on my machine to then use phpMyAdmin to manage a MySQL database that is stored on my local disk    
  The database is edited through phpMyAdmin and connected and designed in MySQL Workbench  
  Finally, the database is then used in a C# WinForms project to present the data in a Windows application  
+ 
+ ![](media/banner2.jpg) ![](media/banner3.jpg)
+ 
  
  The Windows application allows functionaility such as:  
  - Viewing data in a table  
