@@ -15,9 +15,15 @@
  
  The Windows application allows functionaility such as:  
  - Viewing data in a table  
+   - View the Album table  
+   - View the Track table that has a foriegn key associated with selected Album table  
  - Inserting new elements to a table  
+   - Insert a new Album into the Album table  
+   - Insert a new Track into the Track table with foreign key of selected Album  
  - Deleting elements from a table  
- - Searching through a table to view elements of specified name
+   - Delete selected Track  
+ - Searching through a table to view elements of specified name  
+   - Search for a specific Album name
 
 # Tools  
 
