@@ -110,7 +110,7 @@ namespace DatabaseSQLApp
         }
 
         /// <summary>
-        /// Check if txt_albumName is empty or not
+        /// Check if txt_albumName is empty
         /// </summary>
         private void txt_albumName_TextChanged(object sender, EventArgs e)
         {
@@ -118,7 +118,8 @@ namespace DatabaseSQLApp
         }
 
         /// <summary>
-        /// Check if txt_albumArtist is empty or not
+        /// Check if txt_albumArtist is empty
+        /// txt_albumArtist TextBox Event
         /// </summary>
         private void txt_albumArtist_TextChanged(object sender, EventArgs e)
         {
@@ -126,7 +127,8 @@ namespace DatabaseSQLApp
         }
 
         /// <summary>
-        /// Check if txt_albumYear is empty or not
+        /// Check if txt_albumYear is empty
+        /// txt_albumYear TextBox Event
         /// </summary>
         private void txt_albumYear_TextChanged(object sender, EventArgs e)
         {
@@ -134,7 +136,8 @@ namespace DatabaseSQLApp
         }
 
         /// <summary>
-        /// Check if txt_ImageURL is empty or not
+        /// Check if txt_ImageURL is empty
+        /// txt_ImageURL TextBox Event
         /// </summary>
         private void txt_ImageURL_TextChanged(object sender, EventArgs e)
         {
@@ -142,7 +145,8 @@ namespace DatabaseSQLApp
         }
 
         /// <summary>
-        /// Check if txt_Description is empty or not
+        /// Check if txt_Description is empty
+        /// txt_Description TextBox Event
         /// </summary>
         private void txt_Description_TextChanged(object sender, EventArgs e)
         {
