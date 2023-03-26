@@ -122,7 +122,8 @@ namespace DatabaseSQLApp
         }
 
         /// <summary>
-        /// Check if txt_trackTitle is empty or not
+        /// Check if txt_trackTitle is empty
+        /// txt_trackTitle TextBox Event
         /// </summary>
         private void txt_trackTitle_TextChanged(object sender, EventArgs e)
         {
@@ -130,7 +131,8 @@ namespace DatabaseSQLApp
         }
 
         /// <summary>
-        /// Check if txt_trackNumber is empty or not
+        /// Check if txt_trackNumber is empty
+        /// txt_trackNumber TextBox Event
         /// </summary>
         private void txt_trackNumber_TextChanged(object sender, EventArgs e)
         {
@@ -138,15 +140,17 @@ namespace DatabaseSQLApp
         }
 
         /// <summary>
-        /// Check if txt_VideoURL is empty or not
+        /// Check if txt_VideoURL is empty
+        /// txt_trackVideoURL TextBox Event
         /// </summary>
         private void txt_trackVideoURL_TextChanged(object sender, EventArgs e)
         {
             SetButtonState(TextBoxID.VideoURL, txt_trackVideoURL.Text);
         }
-        
+
         /// <summary>
-        /// Check if txt_traclLyrics is empty or not
+        /// Check if txt_traclLyrics is empty
+        /// txt_trackLyrics TextBox Event
         /// </summary>
         private void txt_trackLyrics_TextChanged(object sender, EventArgs e)
         {
