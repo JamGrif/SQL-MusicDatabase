@@ -7,22 +7,24 @@ namespace DatabaseSQLApp.src
     /// </summary>
     public enum AlbumColumnName
     {
-        ID = 0,
-        Name = 1,
-        Artist = 2,
-        Year = 3,
-        ImageURL = 4,
+        ID          = 0,
+        Name        = 1,
+        Artist      = 2,
+        Year        = 3,
+        ImageURL    = 4,
         Description = 5
     }
 
-    // Name of each track of track table in database
+    /// <summary>
+    /// Name of each column of track table in database
+    /// </summary>
     public enum TrackColumnName
     {
-        ID = 0,
-        Name = 1,
-        Number = 2,
-        VideoURL = 3,
-        Lyrics = 4
+        ID          = 0,
+        Name        = 1,
+        Number      = 2,
+        VideoURL    = 3,
+        Lyrics      = 4
     }
 
     /// <summary>
