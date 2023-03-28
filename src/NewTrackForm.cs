@@ -6,7 +6,8 @@ namespace DatabaseSQLApp
     public partial class NewTrackForm : Form
     {
         private readonly MusicForm ParentMusicForm;
-        private readonly int SelectedAlbumID;
+
+        private readonly int SelectedAlbumID; // Foreign key of associated album
 
         public NewTrackForm(MusicForm parentMusicForm, int selectedAlbumID, string selectedAlbumName)
         {
