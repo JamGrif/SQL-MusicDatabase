@@ -12,10 +12,10 @@ namespace DatabaseSQLApp
         /// </summary>
         private enum TextBoxID
         {
-            AlbumName = 0,
-            Artist = 1,
-            Year = 2,
-            ImageUrl = 3,
+            AlbumName   = 0,
+            Artist      = 1,
+            Year        = 2,
+            ImageUrl    = 3,
             Description = 4
         }
 
